@@ -8,7 +8,7 @@ import processing.video.Movie;
 import blobDetection.Blob;
 import blobDetection.BlobDetection;
 
-public class VideoInput {
+public class VideoInput implements Runnable{
 	StateGridMain parent;
 	PImage videoSource;
 //	boolean flag = true;
@@ -27,6 +27,23 @@ public class VideoInput {
 		blobDetection.setPosDiscrimination(true);
 		blobDetection.setBlobMaxNumber(1);
 		blobDetection.setThreshold(0.25f);
+	}
+	
+	@Override
+	public void run() {
+		while (true){
+			if (videoSource instanceof Movie) {
+				if (((Movie) videoSource).available()) {
+					((Movie) videoSource).read();
+					//				flag = false;
+				}
+			} else if (videoSource instanceof Capture) {
+				if (((Capture) videoSource).available()) {
+					((Capture) videoSource).read();
+				}
+			}
+			//		 parent.image(videoSource, 0, 0);
+		}
 	}
 
 	public void processVideo() {

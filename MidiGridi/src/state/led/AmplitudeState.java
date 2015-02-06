@@ -19,7 +19,7 @@ public class AmplitudeState implements LedState{
 
 	@Override
 	public int getValue() {
-		return 255 - (int) (255.0 * led.parent.properties.getChannelValue(channel));
+		return (int) (255.0 * led.parent.properties.getChannelValue(channel));
 	}
 
 }

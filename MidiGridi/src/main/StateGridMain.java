@@ -3,12 +3,12 @@ import oscP5.OscMessage;
 import oscP5.OscP5;
 import processing.core.PApplet;
 import processing.serial.Serial;
-import processing.video.Capture;
 import processing.video.Movie;
 import themidibus.MidiBus;
 import util.Constants;
 import util.Properties;
 import vid.VideoInput;
+import cc.arduino.Arduino;
 import controlP5.ControlEvent;
 import display.Display;
 import display.Grid;
@@ -55,8 +55,10 @@ public class StateGridMain extends PApplet {
 		rectMode(CENTER);
 		properties = new Properties();
 		
-		vid = new VideoInput(this, new Movie(this, "C:\\Users\\Rohan\\Dropbox\\mobileWorkspace\\MidiGridi\\data\\faceshot.mov"));
+		vid = new VideoInput(this, new Movie(this, "C:\\Users\\Rohan\\git\\OSCViz\\MidiGridi\\data\\faceshot.mov"));
 //		vid = new VideoInput(this, new Capture(this, Capture.list()[9]));
+//        (new Thread(vid)).start();
+
 		
 		particles = new Particles(this);
 		
@@ -64,7 +66,7 @@ public class StateGridMain extends PApplet {
 		oscP5 = initalizeOsc();
 //		grid = new Grid(this);
 		settings = new Settings(this);
-//		ledArray = new LedArray(this, new Arduino(this, Arduino.list()[0], 57600));
+		ledArray = new LedArray(this, new Arduino(this, Arduino.list()[0], 57600));
 		screen = particles;
 	}
 
@@ -74,7 +76,7 @@ public class StateGridMain extends PApplet {
 		if (vid.isReady()){
 			screen.draw();
 		}
-//		ledArray.draw();
+		ledArray.draw();
 	}
 	
 	public void noteOn(int channel, int pitch, int velocity) {

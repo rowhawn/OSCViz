@@ -31,6 +31,7 @@ public class Led implements DisplayUnit{
 			arduino.analogWrite(pinNumber, state.getValue());
 			break;
 		case DIGITAL:
+			arduino.digitalWrite(pinNumber, Arduino.LOW);
 			break;
 		default:
 			break;

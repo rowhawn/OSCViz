@@ -10,8 +10,8 @@ public class Properties extends PApplet{
 	public int defaultFadeSleepTime = 15;
 	public int xBlocks = 32;
 	public int yBlocks = 24;
-	public int xLeds = 2;
-	public int yLeds = 2;
+	public int xLeds = 5;
+	public int yLeds = 3;
 	private static int baseGap = 5;
 	public int baseCorner = 3;
 	private static float[] channelValues = new float[8];
