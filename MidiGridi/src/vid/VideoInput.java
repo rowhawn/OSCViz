@@ -43,6 +43,11 @@ public class VideoInput implements Runnable{
 				}
 			}
 			//		 parent.image(videoSource, 0, 0);
+			try {
+				Thread.sleep(20);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

@@ -57,9 +57,8 @@ public class StateGridMain extends PApplet {
 		
 		vid = new VideoInput(this, new Movie(this, "C:\\Users\\Rohan\\git\\OSCViz\\MidiGridi\\data\\faceshot.mov"));
 //		vid = new VideoInput(this, new Capture(this, Capture.list()[9]));
-//        (new Thread(vid)).start();
+		(new Thread(vid)).start();
 
-		
 		particles = new Particles(this);
 		
 //		myBus = new MidiBus(this, -1, -1); // set output to -1 to avoid having to use ports
@@ -67,16 +66,17 @@ public class StateGridMain extends PApplet {
 //		grid = new Grid(this);
 		settings = new Settings(this);
 		ledArray = new LedArray(this, new Arduino(this, Arduino.list()[0], 57600));
+		(new Thread(ledArray)).start();
 		screen = particles;
 	}
 
 	@Override
 	public void draw() {
-		vid.processVideo();
+//		vid.processVideo();
+//		ledArray.draw();
 		if (vid.isReady()){
 			screen.draw();
 		}
-		ledArray.draw();
 	}
 	
 	public void noteOn(int channel, int pitch, int velocity) {

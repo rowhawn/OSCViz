@@ -9,7 +9,7 @@ import util.PinType;
 import controlP5.ControlEvent;
 import display.unit.Led;
 
-public class LedArray implements Display {
+public class LedArray implements Display, Runnable {
 	StateGridMain parent;
 	int xLeds;
 	int yLeds;
@@ -109,6 +109,24 @@ public class LedArray implements Display {
 				arduino);
 		ledArray[4][2].setState(new AmplitudeState(ledArray[4][2],
 				Constants.CHANNEL3));
+	}
+	
+	@Override
+	public void run() {
+		while (true){
+			for (int x = 0; x < xLeds; x++) {
+				for (int y = 0; y < yLeds; y++) {
+					if (ledArray[x][y] != null) {
+						ledArray[x][y].draw();
+					}
+				}
+			}
+			try {
+				Thread.sleep(20);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
